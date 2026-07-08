@@ -4,7 +4,7 @@ doc.add_category("terumet", {
     description = "Information related to Terumet including machines and items",
     build_formspec = doc.entry_builders.text_and_gallery,
     sorting = "custom",
-    sorting_data = {"alloy_smelter"}
+    sorting_data = {"heat", "heatline", "alloy_smelter", "furnace_heater", "thermaldist", "crusher", "thermobox"}
 })
 --ALLOY SMELTER
 local alloy_smelter = terumet.options.smelter
@@ -297,4 +297,10 @@ string = "The thermobox is a machine that stores a large amount of heat, and sen
     .. "\nMachine Stats(these can be changed with upgrades): "
     .. "\nMax heat: " .. tbox.MAX_HEAT
     .. "\nHeat transfer rate: " .. tbox.HEAT_TRANSFER_RATE
+doc.add_entry("terumet", "thermobox", {
+    name = "Thermobox",
+    data = {
+        text = string
+    }
+})
 
