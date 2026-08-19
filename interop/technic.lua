@@ -1,15 +1,4 @@
---[[
-So I was looking in the mod's files and noticed that the crystalized ore is only colorized. It's not a new item per se.
-
-So we could easily create the other ore's by picking a color from the ore's original hues.
-
-Chromium: #c9c9c9
-Lead: #969696
-Silver: #c0c0c0
-Uranium: #a0ffa6
-Zinc: #ccdae0
-
-Also, what about making terumetal dense ore give 2x the amount of crystals as regular terumetal ore? ]]
+--Thanks to LadyK for colors
 local c = {}
 
 c.crys_chromium = terumet.register_crystal({
