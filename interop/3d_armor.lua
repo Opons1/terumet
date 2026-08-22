@@ -1,7 +1,10 @@
 -- add armor when 3darmor mod is also active
 local opts = terumet.options.armor
+local function round(num)
+    return math.round(num * 10) / 10
+end
 
-local function gen_armor_groups(type, data)
+local function gen_armor_groups(ttype, data)
     local grps = {
         armor_use=data.uses,
         armor_heal=(data.heal or 0),
@@ -10,8 +13,9 @@ local function gen_armor_groups(type, data)
         physics_speed=(data.speed or 0),
         physics_gravity=(data.gravity or 0),
         physics_jump=(data.jump or 0),
+        armor_radiation = (radiation or 0)
     }
-    grps[type]=1
+    grps[ttype]=1
     return grps
 end
 
@@ -52,9 +56,15 @@ local function reg_terumet_armor(data)
     data.dgroups = data.dgroups or {cracky=3, snappy=3, choppy=3, crumbly=3, level=1}
     data.name = data.name or data.suffix
 
-    local low_def = data.total_def / 6
-    local hi_def = data.total_def / 3
+    local groups_hi = {}
+    local groups_low = {}
+    groups_low.fleshy = data.total_def / 6
+    groups_hi.fleshy = data.total_def / 3
 
+    if data.total_radiation then
+        groups_hi.radiation = round(data.total_radiation / 3)
+        groups_low.radiation = round(data.total_radiation / 6)
+    end
     data.heal = data.total_heal / 4
     data.speed = data.weight / -100
     data.gravity = data.weight / 50
@@ -66,7 +76,7 @@ local function reg_terumet_armor(data)
         texture = terumet.tex('armboots_'..data.suffix),
         preview = terumet.tex('prvboots_'..data.suffix),
         groups = gen_armor_groups('armor_feet', data),
-        armor_groups = {fleshy=low_def},
+        armor_groups = groups_low,
         damage_groups = data.dgroups,
     })
     reg_recipe_boots(boots_id, data.mat)
@@ -79,7 +89,7 @@ local function reg_terumet_armor(data)
         texture = terumet.tex('armhelm_'..data.suffix),
         preview = terumet.tex('prvhelm_'..data.suffix),
         groups = gen_armor_groups('armor_head', data),
-        armor_groups = {fleshy=low_def},
+        armor_groups = groups_low,
         damage_groups = data.dgroups,
     })
     reg_recipe_helm(helm_id, data.mat)
@@ -92,7 +102,7 @@ local function reg_terumet_armor(data)
         texture = terumet.tex('armchest_'..data.suffix),
         preview = terumet.tex('prvchest_'..data.suffix),
         groups = gen_armor_groups('armor_torso', data),
-        armor_groups = {fleshy=hi_def},
+        armor_groups = groups_hi,
         damage_groups = data.dgroups,
     })
     reg_recipe_chest(chest_id, data.mat)
@@ -105,7 +115,7 @@ local function reg_terumet_armor(data)
         texture = terumet.tex('armlegs_'..data.suffix),
         preview = terumet.tex('prvlegs_'..data.suffix),
         groups = gen_armor_groups('armor_legs', data),
-        armor_groups = {fleshy=hi_def},
+        armor_groups = groups_hi,
         damage_groups = data.dgroups,
     })
     reg_recipe_legs(legs_id, data.mat)
@@ -216,4 +226,4 @@ reg_terumet_armor{suffix='tgol', name='Terugold',    mat=terumet.id('ingot_tgol'
 reg_terumet_armor{suffix='ttin', name='Terutin',     mat=terumet.id('ingot_ttin'),
     mrv=21,  total_def=38, total_heal=24, weight=-2, xinfo='Weight -2', uses=410, fire=0.34, breathing=.1} -- 3 pcs = immune to torches
 reg_terumet_armor{suffix='rsuit', name='Vulcansuit', mat=terumet.id('item_rsuitmat'),
-    mrv=180, total_def=78, total_heal=50, weight=-3, xinfo='Weight -3', uses=120, fire=1} -- 1 pc = immune to torches, 3 pcs = immune to fire
+    mrv=180, total_def=78, total_heal=50, total_radiation = 80, weight=-3, xinfo='Weight -3', uses=120, fire=1} -- 1 pc = immune to torches, 3 pcs = immune to fire
