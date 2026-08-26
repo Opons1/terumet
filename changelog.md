@@ -1,6 +1,23 @@
 ## Terumetal mod changelog
 Newer versions listed first
-
+## Version 3.3
+* Use the mod 'doc' to add a terumet category for tutorials(Will likely be revised later)
+* Add a function to register a node to be collectible via ore-saw
+* Add ore-saw support to the following mods:
+    * technic
+    * birthstones
+    * blox
+    * gemstones
+    * industrious
+    * lapis
+    * opw_events
+    * techage
+* Add technic support to Crystal Vulcaniser
+* Also give vulcansuit radiation protection(for when used with technic)
+### Changes from Blocky Survival fork:
+* Tubelib upgrade compat with battery/fuel slot
+* Allow alloy smelter to accept groups as inputs
+* Make Unified Inventory optional again
 ## Version 3.2
 * Terumet now depends on VanessaE's **basic_materials** mod and integrates many of its materials and recipes with it.
     * It can be found through the Minetest Content Server or downloaded [here](https://gitlab.com/VanessaE/basic_materials)
