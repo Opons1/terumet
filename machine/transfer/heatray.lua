@@ -271,7 +271,7 @@ minetest.register_node( base_ray.reflector_id, {
     is_ground_content = false,
     sounds = default.node_sound_metal_defaults(),
     paramtype2 = 'facedir',
-    groups = {cracky=2},
+    groups = {cracky = 2, no_silktouch = 1},
     tiles = {
         terumet.tex('rayref_front'), terumet.tex('rayref_back'), terumet.tex('rayref_sides')
     }

@@ -120,7 +120,7 @@ function base_mach.register_frame(id, name, xinfo, craft_item, center_item)
             }
         },
         is_ground_content = false,
-        groups = {cracky = 2},
+        groups = {cracky = 2, no_silktouch = 1},
         sounds = default.node_sound_metal_defaults()
     })
 
@@ -653,7 +653,7 @@ function base_mach.nodedef(additions)
         is_ground_content = false,
         sounds = default.node_sound_metal_defaults(),
         paramtype2 = 'facedir',
-        groups = {cracky=2},
+        groups = {cracky = 2, no_silktouch = 1},
         drop = '', -- since after_dig_node/on_destruct/on_blast handles machines dropping w/stored heat, flag machines as ignoring usual drop mechanic
         -- default inventory slot control
         allow_metadata_inventory_put = base_mach.allow_put,
